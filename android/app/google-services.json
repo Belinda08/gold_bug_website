@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "55110423556",
+    "firebase_url": "https://heyidk-377f0-default-rtdb.firebaseio.com",
+    "project_id": "heyidk-377f0",
+    "storage_bucket": "heyidk-377f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55110423556:android:618ce2d89226a850fcd151",
+        "android_client_info": {
+          "package_name": "com.belindaapp.gold_bug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpMZXi6EZFFlE4oNSgP8OJ2Fp0LPgCz7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
