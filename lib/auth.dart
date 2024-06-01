@@ -114,12 +114,12 @@ class _AuthGateState extends State<AuthGate> {
       };
     } else {
       authButtons = {
-        Buttons.Apple: () => _handleMultiFactorException(
-          _signInWithApple,
-        ),
-        Buttons.Google: () => _handleMultiFactorException(
-          _signInWithGoogle,
-        ),
+        // Buttons.Apple: () => _handleMultiFactorException(
+        //   _signInWithApple,
+        // ),
+        // Buttons.Google: () => _handleMultiFactorException(
+        //   _signInWithGoogle,
+        // ),
         // Buttons.Facebook: () => _handleMultiFactorException(
         //   _signInWithFacebook,
         // ),
@@ -278,10 +278,10 @@ class _AuthGateState extends State<AuthGate> {
                               },
                               child: isLoading
                                   ? const CircularProgressIndicator.adaptive()
-                                  : Text(
-                                mode != AuthMode.phone
-                                    ? 'Sign in with Phone Number'
-                                    : 'Sign in with Email and Password',
+                                  : const Text(
+                                // mode != AuthMode.phone
+                                //     ? 'Sign in with Phone Number'
+                                    'Sign in with Email and Password',
                               ),
                             ),
                           ),
