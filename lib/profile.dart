@@ -24,19 +24,23 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   late User user;
   late TextEditingController controller;
+  late TextEditingController controllerPost;
   final phoneController = TextEditingController();
 
   String? photoURL;
 
   bool showSaveButton = false;
+  bool showPostButton = false;
   bool isLoading = false;
 
   @override
   void initState() {
     user = auth.currentUser!;
     controller = TextEditingController(text: user.displayName);
+    controllerPost = TextEditingController();
 
     controller.addListener(_onNameChanged);
+    controllerPost.addListener(_onPostUpdate);
 
     auth.userChanges().listen((event) {
       if (event != null && mounted) {
@@ -54,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void dispose() {
     controller.removeListener(_onNameChanged);
-
+    controllerPost.removeListener(_onNameChanged);
     super.dispose();
   }
 
@@ -70,6 +74,16 @@ class _ProfilePageState extends State<ProfilePage> {
         showSaveButton = false;
       } else {
         showSaveButton = true;
+      }
+    });
+  }
+
+  void _onPostUpdate() {
+    setState(() {
+      if (controllerPost.text.isEmpty) {
+        showPostButton = false;
+      } else {
+        showPostButton = true;
       }
     });
   }
@@ -172,11 +186,20 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       const SizedBox(height: 20),
                       TextFormField(
-                        controller: phoneController,
+                        controller: controllerPost,
                         decoration: const InputDecoration(
-                          icon: Icon(Icons.phone),
-                          hintText: '+33612345678',
-                          labelText: 'Phone number',
+                          icon: Icon(Icons.text_fields),
+                          hintText: 'Anything is Nice!',
+                          labelText: 'Write some thoughts',
+                        ),
+                      ),
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 200),
+                        child: !showPostButton
+                            ? SizedBox(key: UniqueKey())
+                            : TextButton(
+                          onPressed: isLoading ? null : null,
+                          child: const Text('Update What you like to Post'),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -256,5 +279,6 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> _signOut() async {
     await auth.signOut();
     await GoogleSignIn().signOut();
+    Navigator.popUntil(context, (route) => route.isFirst);
   }
 }
